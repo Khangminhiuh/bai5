@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family:'Poppins', sans-serif;
+            background: rgba(249,249,249);
+        }
+        .dashboard {
+            width: 100%;
+            display: flex;
+        }
+        .sidebar {
+            width: 78px;
+            min-height: 100vh;
+            flex-shrink: 0;
+            background: white;
+            border-right: 1px solid #eeeeee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 159px;
+        }
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4384ed;
+            font-size: 25px;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 47px;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(170,170,170,0.5);
+        }
+        .menu-item img {
+            width: 24px;
+            height: 24px;
+            opacity: 0.5;
+        }
+        .menu-item.active {
+            height: 58px;
+            width: 78px;
+            color: #4384ed;
+            background: #eaf2ff;
+        }
+        .main {
+            flex: 1;
+            min-width: 0;
+            background: rgba(249,249,249);
+        }
+        .header {
+            width: 100%;
+            background: rgba(249,249,249);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 40px;
+            gap: 551px;
+        }
+        .welcome{
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .welcome h2 {
+            font-size: 24px;
+            height: 36px;
+            width: 233px;
+            font-weight: 500;
+            color: rgb(62,67,93);
+        }
+        .welcome p {
+            font-size: 16px;
+            color: #aaa;
+            height: 24px;
+            width: 139px;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .search {
+            width: 354px;
+            height: 52px;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+        }
+        .search span {
+            color: #aaa;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+        }
+        .search input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding-left: 16px;
+            font-size: 16px;
+        }
+        .small-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .background-notification {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .notification {
+            color: #aaa;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+        }
+        .content {
+            padding: 0 40px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .backgound-contain {
+            background-color: white;
+        }
+        .banner {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(
+                100deg,
+               #a9d2f2 0%,
+                #c9e3f7 20%,
+            #e8f2fb 35%,
+            #fff5dc 60%,
+            #fff5dc 100%
+            );
+        }
+        .profile-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .profile-info h3 {
+            font-size: 20px;
+            margin-bottom: 6px;
+            height:30px;
+            font-weight: 500;
+        }
+        .profile-info p {
+            font-size: 16px;
+            color: #aaa;
+        }
+        .edit-btn {
+            border: none;
+            height: 44px;
+            width: 93px;
+            background: #4384ed;
+            color: white;
+            border-radius: 8px;
+            padding: 9px 20px;
+        }
+        .formandemail {
+            display: flex;
+            flex-direction: column;
+        }
+        .form {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 0;
+            column-gap: 32px;
+        }
+        .form-group {
+            width: calc(50% - 16px);
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            font-size: 16px;
+            color: black;
+            width: 100%;
+            height: 24px;
+            margin-bottom: 12px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 52px;
+            border: none;
+            background: #fafafa;
+            border-radius: 8px;
+            outline: none;
+            color: #777;
+            font-size: 16px;
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+        .form-group select {
+            appearance: none;
+            background-image: url('/logo/arrow-down.svg');
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            opacity: 0.5;
+        }
+        .email-section {
+            margin-top: 7px;
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+            padding-bottom: 71px;
+        }
+        .email-section h3 {
+            font-size: 16px;
+            height: 27px;
+            width: 266px;
+        }
+        .email-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .email-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #edf4ff;
+            color: #4384ed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .email-item strong {
+            font-size: 16px;
+            font-weight: 400;
+            height: 24px;
+            width:198px;
+        }
+        .email-item p {
+            font-size: 16px;
+            color: #aaa;
+            margin-top: 6px;
+            height: 24px;
+            width:198px;
+        }
+        .add-email {
+            border: none;
+            background: #edf4ff;
+            color: #4384ed;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            height: 44px;
+            width: 209px;
+        }
+        @media (max-width: 900px) {
+            .header {
+                padding: 0 25px;
+            }
+            .search {
+                width: 170px;
+            }
+        }
+        @media (max-width: 650px) {
+            .header {
+                padding: 20px 15px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .header-right {
+                width: 100%;
+            }
+            .search {
+                flex: 1;
+            }
+            .content {
+                 display: flex;
+            align-items: center;
+            justify-self: center;
+            gap: 50px;
+            }
+            .banner {
+                height: 90px;
+            }
+            .form {
+                flex-direction: column;
+            }
+            .form-group {
+                width: 100%;
+            }
+        }
+        @media (max-width: 450px) {
+
+            .sidebar {
+                display: none;
+            }
+            .welcome h2 {
+                font-size: 17px;
+            }
+            .profile-top {
+                align-items: flex-start;
+            }
+        }
+        .page-form{
+            display: flex;
+            flex-direction: column;
+            gap: 30px; 
+            background-color: white;
+            padding: 30px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="menu">
+                <div class="menu-item active">
+                    <img src="/logo/element-4.svg" alt="logo">
+                </div>
+                <div class="menu-item">
+                    <img src="/logo/graph.svg" alt="logo">
+                </div>
+                <div class="menu-item">
+                    <img src="/logo/medal-star.svg" alt="logo">
+                </div>
+                <div class="menu-item">
+                    <img src="/logo/messages.svg" alt="logo">
+                </div>
+                <div class="menu-item">
+                    <img src="/logo/setting-2.svg" alt="logo">
+                </div>
+            </div>
+        </aside>
+    <main class="main">
+        <header class="header">
+            <div class="welcome">
+                <h2>
+                    Welcome, Amanda
+                </h2>
+                <p>
+                    Tue, 07 June 2022
+                </p>
+            </div>
+            <div class="header-right">
+                <div class="search">
+                    <span>
+                         <img src="/logo/search-normal.svg">
+                    </span>
+
+                    <input
+                        type="text"
+                        placeholder="Search"
+                    >
+                </div>
+                 <div class="background-notification">
+                    <div class="notification">
+                        <img src="/logo/notification-bing.svg">
+                    </div>
+                </div>
+                <img class="small-avatar" src="/logo/Rectangle 1072.svg" alt="Avatar">
+            </div>
+            </header>
+            <section class="content">
+                <div class="backgound-contain">
+                <div class="banner"></div>
+                <div  class="page-form">
+                <div class="profile-card">
+                    <div class="profile-top">
+                        <div class="profile-info">
+                            <img
+                                class="avatar" src="/logo/Ellipse 11.png" alt="Alexa Rawles"
+                            >
+                            <div>
+                                <h3>
+                                    Alexa Rawles
+                                </h3>
+                                <p>
+                                    alexarawles@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                        <button class="edit-btn">
+                            Edit
+                        </button>
+                    </div> 
+                        </div>
+                <div class="formandemail">
+                    <div class="form">
+                        <div class="form-group">
+                            <label>
+                                Full Name
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Your First Name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Nick Name
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Your Nick Name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Gender
+                            </label>
+                            <select>
+                                <option>
+                                    Your Gender
+                                </option>
+                                <option>
+                                    Male
+                                </option>
+                                <option>
+                                    Female
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Country
+                            </label>
+                            <select>
+                                <option>
+                                    Your Country
+                                </option>
+                                <option>
+                                    Vietnam
+                                </option>
+                                <option>
+                                    USA
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Language
+                            </label>
+                            <select>
+                                <option>
+                                    Your Language
+                                </option>
+                                <option>
+                                    Vietnamese
+                                </option>
+                                <option>
+                                    English
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Time Zone
+                            </label>
+                            <select>
+                                <option>
+                                    Your Time Zone
+                                </option>
+                                <option>
+                                    GMT +7
+                                </option>
+                                <option>
+                                    GMT +8
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="email-section">
+                        <h3>
+                            My email Address
+                        </h3>
+                        <div class="email-item">
+                            <div class="email-icon">
+                                <img src="/logo/sms.svg">
+                            </div>
+                            <div>
+
+                                <strong>
+                                    alexarawles@gmail.com
+                                </strong>
+                                <p>
+                                    1 month ago
+                                </p>
+                            </div>
+                        </div>
+                        <button class="add-email">
+                            + Add Email Address
+                        </button>
+                    </div>
+                </div>
+                    </div>
+            </section>
+        </div>
+        </main>
+    </div>
+</body>
+</html>
